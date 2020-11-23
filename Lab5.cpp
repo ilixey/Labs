@@ -7,8 +7,8 @@
 using namespace std;
 
 void showMenu();
-int writeNumbers();
-string writeWord();
+int number();
+string Word();
 
 class Products
 {
@@ -21,16 +21,16 @@ public:
 		this->NDS = NDS;
 		this->origin = origin;
 	};
-	virtual void show()
+	void show()
 	{
 		system("cls");
 		cout << "Страна-производитель: " << this->origin << endl << "НДС: " << this->NDS << "%" << endl;
 	};
 };
 
-int mainMenu(Products** mass);
+int Menu(Products** mass);
 
-class Fruits :public Products
+class Fruits :virtual public Products
 {
 private:
 	int price;
@@ -42,14 +42,14 @@ public:
 		this->price = price;
 		this->amount = amount;
 	};
-	void show() override
+	void show()
 	{
 		Products::show();
 		cout << "Цена: " << this->price << "$" << endl << "Количество: " << this->amount << "кг" << endl;
 	};
 };
 
-class Vegetables :public Products
+class Vegetables :virtual public Products
 {
 private:
 	int price;
@@ -61,14 +61,14 @@ public:
 		this->price = price;
 		this->kind = kind;
 	};
-	void show() override
+	void show()
 	{
 		Products::show();
 		cout << "Цена: " << this->price << "$" << endl << "Дата производства: " << this->kind << endl;
 	};
 };
 
-class Alcohol :public Products
+class Alcohol :virtual public Products
 {
 private:
 	int strength;
@@ -80,7 +80,7 @@ public:
 		this->strength = strength;
 		this->type = type;
 	};
-	void show() override
+	void show()
 	{
 		Products::show();
 		cout << "Крепость: " << this->strength << "%" << endl << "Тип: " << this->type << endl;
@@ -103,7 +103,7 @@ int main()
 	mass[0] = &fruits;
 	mass[1] = &vegetables;
 	mass[2] = &alcohol;
-	mainMenu(mass);
+	Menu(mass);
 	return 0;
 }
 
@@ -112,13 +112,13 @@ void showMenu()
 	cout << "\tНажмите 1 - Фрукты \n\tНажмите 2 - Овощи \n\tНажмите 3 - Алкоголь\n\tНажмите 4 - выход\n\tВаш выбор:> ";
 }
 
-int mainMenu(Products** mass)
+int Menu(Products** mass)
 {
 	int choice;
 	while (true)
 	{
 		showMenu();
-		choice = writeNumbers();
+		choice = number();
 		cout << endl;
 		system("cls");
 		switch (choice)
@@ -128,15 +128,15 @@ int mainMenu(Products** mass)
 			string origin;
 			int NDS;
 			cout << "Введите страну-производитель:" << endl;
-			origin = writeWord();
+			origin = Word();
 			cout << "\nВведите НДС:" << endl;
-			NDS = writeNumbers();
+			NDS = number();
 
 			int amount, price;
 			cout << "\nВведите цену:" << endl;
-			price = writeNumbers();
+			price = number();
 			cout << "\nВведите количество: " << endl;
-			amount = writeNumbers();
+			amount = number();
 			mass[0] = new Fruits(NDS, origin, price, amount);
 			mass[0]->show();
 			break;
@@ -146,16 +146,16 @@ int mainMenu(Products** mass)
 			string origin;
 			int NDS;
 			cout << "\nВведите страну-производитель:" << endl;
-			origin = writeWord();
+			origin = Word();
 			cout << "Введите НДС:" << endl;
-			NDS = writeNumbers();
+			NDS = number();
 
 			int price;
 			string kind;
 			cout << "\nВведите цену:" << endl;
-			price = writeNumbers();
+			price = number();
 			cout << "\nВведите вид" << endl;
-			kind = writeWord();
+			kind = Word();
 			mass[1] = new Vegetables(NDS, origin, price, kind);
 			mass[1]->show();
 			break;
@@ -165,16 +165,16 @@ int mainMenu(Products** mass)
 			string origin;
 			int NDS;
 			cout << "Введите страну-производитель:" << endl;
-			origin = writeWord();
+			origin = Word();
 			cout << "\nВведите НДС:" << endl;
-			NDS = writeNumbers();
+			NDS = number();
 
 			string type;
 			int strength;
 			cout << "\nВведите Крепость:" << endl;
-			strength = writeNumbers();
+			strength = number();
 			cout << "\nВведите тип" << endl;
-			type = writeWord();
+			type = Word();
 			mass[2] = new Alcohol(NDS, origin, strength, type);
 			mass[2]->show();
 			break;
@@ -190,7 +190,7 @@ int mainMenu(Products** mass)
 	if (mass[2] != NULL) delete mass[2];
 }
 
-int writeNumbers()
+int number()
 {
 	string numbers;
 	while (true) {
@@ -218,7 +218,7 @@ int writeNumbers()
 	return stoi(numbers);
 }
 
-string writeWord()
+string Word()
 {
 	string slovo;
 	while (true) {
