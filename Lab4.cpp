@@ -7,9 +7,9 @@
 using namespace std;
 
 void showMenu();
-int mainMenu();
-int writeNumbers();
-string writeWord();
+int menu();
+int number();
+string word();
 
 class Products
 {
@@ -31,9 +31,8 @@ private:
 	int price;
 	int amount;
 public:
-	Fruits(int NDS, string origin, int price, int amount):Products(NDS, origin)
+	Fruits(int NDS, string origin, int price, int amount) :Products(NDS, origin)
 	{
-		this->Products::Products(NDS, origin);
 		this->price = price;
 		this->amount = amount;
 	};
@@ -46,9 +45,8 @@ private:
 	int price;
 	string kind;
 public:
-	Vegetables(int NDS, string origin, int price, string kind):Products(NDS, origin)
+	Vegetables(int NDS, string origin, int price, string kind) :Products(NDS, origin)
 	{
-		this->Products::Products(NDS, origin);
 		this->price = price;
 		this->kind = kind;
 	};
@@ -61,9 +59,8 @@ private:
 	int strength;
 	string type;
 public:
-	Alcohol(int NDS, string origin, int strength, string type):Products(NDS, origin)
+	Alcohol(int NDS, string origin, int strength, string type) :Products(NDS, origin)
 	{
-		this->Products::Products(NDS, origin);
 		this->strength = strength;
 		this->type = type;
 	};
@@ -78,7 +75,7 @@ int main()
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "rus");
 	cout << endl;
-	mainMenu();
+	menu();
 	return 0;
 }
 
@@ -87,7 +84,7 @@ void showMenu()
 	cout << "\tНажмите 1 - Фрукты \n\tНажмите 2 - Овощи \n\tНажмите 3 - Алкоголь\n\tНажмите 4 - выход\n\tВаш выбор:> ";
 }
 
-int mainMenu()
+int menu()
 {
 	Fruits* fruits = NULL;
 	Vegetables* vegetables = NULL;
@@ -97,7 +94,7 @@ int mainMenu()
 	while (true)
 	{
 		showMenu();
-		choice = writeNumbers();
+		choice = number();
 		cout << endl;
 		system("cls");
 		switch (choice)
@@ -107,15 +104,15 @@ int mainMenu()
 			string origin;
 			int NDS;
 			cout << "Введите страну-производитель:" << endl;
-			origin = writeWord();
+			origin = word();
 			cout << "\nВведите НДС:" << endl;
-			NDS = writeNumbers();
+			NDS = number();
 
 			int amount, price;
 			cout << "\nВведите цену:" << endl;
-			price = writeNumbers();
+			price = number();
 			cout << "\nВведите количество: " << endl;
-			amount = writeNumbers();
+			amount = number();
 			fruits = new Fruits(NDS, origin, price, amount);
 			fruits->showFruits();
 			break;
@@ -125,16 +122,16 @@ int mainMenu()
 			string origin;
 			int NDS;
 			cout << "\nВведите страну-производитель:" << endl;
-			origin = writeWord();
+			origin = word();
 			cout << "Введите НДС:" << endl;
-			NDS = writeNumbers();
+			NDS = number();
 
 			int price;
 			string kind;
 			cout << "\nВведите цену:" << endl;
-			price = writeNumbers();
+			price = number();
 			cout << "\nВведите вид" << endl;
-			kind = writeWord();
+			kind = word();
 			vegetables = new Vegetables(NDS, origin, price, kind);
 			vegetables->showVegetables();
 			break;
@@ -144,16 +141,16 @@ int mainMenu()
 			string origin;
 			int NDS;
 			cout << "Введите страну-производитель:" << endl;
-			origin = writeWord();
+			origin = word();
 			cout << "\nВведите НДС:" << endl;
-			NDS = writeNumbers();
+			NDS = number();
 
 			string type;
 			int strength;
 			cout << "\nВведите Крепость:" << endl;
-			strength = writeNumbers();
+			strength = number();
 			cout << "\nВведите тип" << endl;
-			type = writeWord();
+			type = word();
 			alcohol = new Alcohol(NDS, origin, strength, type);
 			alcohol->showAlcohol();
 			break;
@@ -166,38 +163,38 @@ int mainMenu()
 	}
 	if (fruits != NULL) delete fruits;
 	if (vegetables != NULL) delete vegetables;
-	if (alcohol!= NULL) delete alcohol;
+	if (alcohol != NULL) delete alcohol;
 }
 
 void Products::showProducts()
 {
 	system("cls");
-	cout << "Страна-производитель: " << this->origin << endl << "НДС: " << this->NDS << "%"<< endl;
+	cout << "Страна-производитель: " << this->origin << endl << "НДС: " << this->NDS << "%" << endl;
 }
 
 void Fruits::showFruits()
 {
 	system("cls");
 	Products::showProducts();
-	cout << "Цена: " << this->price <<"$"<< endl << "Количество: " << this->amount <<"кг"<< endl;
+	cout << "Цена: " << this->price << "$" << endl << "Количество: " << this->amount << "кг" << endl;
 }
 
 void Vegetables::showVegetables()
 {
 	system("cls");
 	Products::showProducts();
-	cout << "Цена: " << this->price <<"$"<< endl << "Дата производства: " << this->kind << endl;
+	cout << "Цена: " << this->price << "$" << endl << "Дата производства: " << this->kind << endl;
 }
 
 void Alcohol::showAlcohol()
 {
 	system("cls");
 	Products::showProducts();
-	cout << "Крепость: " << this->strength <<"%"<< endl << "Тип: " << this->type << endl;
+	cout << "Крепость: " << this->strength << "%" << endl << "Тип: " << this->type << endl;
 }
 
 
-int writeNumbers()
+int number()
 {
 	string numbers;
 	while (true) {
@@ -225,7 +222,7 @@ int writeNumbers()
 	return stoi(numbers);
 }
 
-string writeWord()
+string word()
 {
 	string slovo;
 	while (true) {
