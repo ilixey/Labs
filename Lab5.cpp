@@ -143,7 +143,7 @@ int Menu(Products** mass)
 			int NDS;
 			cout << "\nВведите страну-производитель:" << endl;
 			origin = Word();
-			cout << "Введите НДС:" << endl;
+			cout << "\nВведите НДС:" << endl;
 			NDS = number();
 
 			int price;
