@@ -21,16 +21,12 @@ public:
 		this->NDS = NDS;
 		this->origin = origin;
 	};
-	void show()
-	{
-		system("cls");
-		cout << "Страна-производитель: " << this->origin << endl << "НДС: " << this->NDS << "%" << endl;
-	};
+	virtual void show() = 0;
 };
 
 int Menu(Products** mass);
 
-class Fruits :virtual public Products
+class Fruits :public Products
 {
 private:
 	int price;
@@ -38,18 +34,18 @@ private:
 public:
 	Fruits(int NDS, string origin, int price, int amount):Products(NDS, origin)
 	{
-		this->Products::Products(NDS, origin);
 		this->price = price;
 		this->amount = amount;
 	};
-	void show()
+	void show() override
 	{
-		Products::show();
+		system("cls");
+		cout << "Страна-производитель: " << this->origin << endl << "НДС: " << this->NDS << "%" << endl;
 		cout << "Цена: " << this->price << "$" << endl << "Количество: " << this->amount << "кг" << endl;
 	};
 };
 
-class Vegetables :virtual public Products
+class Vegetables :public Products
 {
 private:
 	int price;
@@ -57,18 +53,18 @@ private:
 public:
 	Vegetables(int NDS, string origin, int price, string kind):Products(NDS, origin)
 	{
-		this->Products::Products(NDS, origin);
 		this->price = price;
 		this->kind = kind;
 	};
-	void show()
+	void show() override
 	{
-		Products::show();
-		cout << "Цена: " << this->price << "$" << endl << "Дата производства: " << this->kind << endl;
+		system("cls");
+		cout << "Страна-производитель: " << this->origin << endl << "НДС: " << this->NDS << "%" << endl;
+		cout << "Цена: " << this->price << "$" << endl << "Вид: " << this->kind << endl;
 	};
 };
 
-class Alcohol :virtual public Products
+class Alcohol :public Products
 {
 private:
 	int strength;
@@ -76,13 +72,13 @@ private:
 public:
 	Alcohol(int NDS, string origin, int strength, string type):Products(NDS, origin)
 	{
-		this->Products::Products(NDS, origin);
 		this->strength = strength;
 		this->type = type;
 	};
-	void show()
+	void show() override
 	{
-		Products::show();
+		system("cls");
+		cout << "Страна-производитель: " << this->origin << endl << "НДС: " << this->NDS << "%" << endl;
 		cout << "Крепость: " << this->strength << "%" << endl << "Тип: " << this->type << endl;
 	}
 	;
