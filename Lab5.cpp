@@ -39,7 +39,7 @@ public:
 	};
 	void show() override
 	{
-		system("cls");
+	
 		cout << "Страна-производитель: " << this->origin << endl << "НДС: " << this->NDS << "%" << endl;
 		cout << "Цена: " << this->price << "$" << endl << "Количество: " << this->amount << "кг" << endl;
 	};
@@ -58,7 +58,7 @@ public:
 	};
 	void show() override
 	{
-		system("cls");
+
 		cout << "Страна-производитель: " << this->origin << endl << "НДС: " << this->NDS << "%" << endl;
 		cout << "Цена: " << this->price << "$" << endl << "Вид: " << this->kind << endl;
 	};
@@ -77,7 +77,7 @@ public:
 	};
 	void show() override
 	{
-		system("cls");
+
 		cout << "Страна-производитель: " << this->origin << endl << "НДС: " << this->NDS << "%" << endl;
 		cout << "Крепость: " << this->strength << "%" << endl << "Тип: " << this->type << endl;
 	}
@@ -110,80 +110,47 @@ void showMenu()
 
 int Menu(Products** mass)
 {
-	int choice;
-	while (true)
-	{
-		showMenu();
-		choice = number();
-		cout << endl;
-		system("cls");
-		switch (choice)
-		{
-		case 1://Fruits
-		{
-			string origin;
-			int NDS;
-			cout << "Введите страну-производитель:" << endl;
-			origin = Word();
-			cout << "\nВведите НДС:" << endl;
-			NDS = number();
 
-			int amount, price;
-			cout << "\nВведите цену:" << endl;
-			price = number();
-			cout << "\nВведите количество: " << endl;
-			amount = number();
-			mass[0] = new Fruits(NDS, origin, price, amount);
-			mass[0]->show();
-			break;
-		}
-		case 2://Vegetables
-		{
-			string origin;
-			int NDS;
-			cout << "\nВведите страну-производитель:" << endl;
-			origin = Word();
-			cout << "\nВведите НДС:" << endl;
-			NDS = number();
+	cout << endl;
+	system("cls");
 
-			int price;
-			string kind;
-			cout << "\nВведите цену:" << endl;
-			price = number();
-			cout << "\nВведите вид" << endl;
-			kind = Word();
-			mass[1] = new Vegetables(NDS, origin, price, kind);
-			mass[1]->show();
-			break;
-		}
-		case 3://alcohol
-		{
-			string origin;
-			int NDS;
-			cout << "Введите страну-производитель:" << endl;
-			origin = Word();
-			cout << "\nВведите НДС:" << endl;
-			NDS = number();
+	string origin;
+	int NDS;
+	cout << "Введите страну-производитель:" << endl;
+	origin = Word();
+	cout << "\nВведите НДС:" << endl;
+	NDS = number();
 
-			string type;
-			int strength;
-			cout << "\nВведите Крепость:" << endl;
-			strength = number();
-			cout << "\nВведите тип" << endl;
-			type = Word();
-			mass[2] = new Alcohol(NDS, origin, strength, type);
-			mass[2]->show();
-			break;
-		}
-		case 4:
-			return 0;
-		default:
-			cout << endl << "Ошибка! Неверное действие" << endl;
-		}
-	}
+	int amount, price;
+	cout << "\nВведите цену:" << endl;
+	price = number();
+	cout << "\nВведите количество: " << endl;
+	amount = number();
+
+	string kind;
+	cout << "\nВведите вид" << endl;
+	kind = Word();
+
+	string type;
+	int strength;
+	cout << "\nВведите Крепость:" << endl;
+	strength = number();
+	cout << "\nВведите тип" << endl;
+	type = Word();
+	system("cls");
+
+	mass[0] = new Fruits(NDS, origin, price, amount);
+	mass[0]->show();
+	mass[1] = new Vegetables(NDS, origin, price, kind);
+	mass[1]->show();
+	mass[2] = new Alcohol(NDS, origin, strength, type);
+	mass[2]->show();
+
 	if (mass[0] != NULL) delete mass[0];
 	if (mass[1] != NULL) delete mass[1];
 	if (mass[2] != NULL) delete mass[2];
+
+	return 0;
 }
 
 int number()
