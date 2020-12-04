@@ -20,7 +20,7 @@ public:
 	{
 		this->NDS = NDS;
 	};
-	virtual void show() 
+	void show() 
 	{
 		cout << "НДС: " << this->NDS << "%" << endl;
 	};
@@ -44,9 +44,8 @@ public:
 		this->rate = rate;
 	};
 
-	void show() override
+	void show()
 	{
-		system("cls");
 		cout << "Компания-поставщик: " << this->company<< endl << "Страна-поставщик: " << this->country<< endl << "Рейтинг поставщика: " << this->rate << endl;
 	};
 };
@@ -61,9 +60,8 @@ public:
 	{
 		this->name = name;
 	};
-	void show() override
+	void show()
 	{
-		system("cls");
 		cout << "Отдел: " << this->name << endl;
 	};
 };
@@ -84,11 +82,12 @@ public:
 	};
 	void show_unit() 
 	{
+		system("cls");
 		Products::show();
 		Provider::show();
 		Section::show();
-		cout << endl << "Код товара: " << this->code << endl;
-		cout << "Товар: " << this->kind << endl << "Цена: " << this->price << endl;
+		cout << "Код товара: " << this->code << endl;
+		cout << "Товар: " << this->kind << endl << "Цена: " << this->price << "$" << endl;
 	};
 };
 
@@ -107,7 +106,7 @@ int main()
 
 int Menu()
 {
-	Unit *unit = NULL;
+	Unit* unit = NULL;
 	system("cls");
 
 	int NDS;
@@ -139,6 +138,8 @@ int Menu()
 	unit = new Unit(NDS, company, country, rate, name, price, kind, code);
 	unit->show_unit();
 	if (unit != NULL) delete unit;
+	return 0;
+
 }
 
 int number()
